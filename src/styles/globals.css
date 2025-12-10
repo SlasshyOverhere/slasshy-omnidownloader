@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Cyberpunk Dark Theme */
+    --background: 240 15% 5%;
+    --foreground: 220 15% 95%;
+    
+    --primary: 280 100% 60%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 195 100% 50%;
+    --secondary-foreground: 0 0% 0%;
+    
+    --accent: 330 100% 60%;
+    --accent-foreground: 0 0% 100%;
+    
+    --muted: 240 10% 25%;
+    --muted-foreground: 240 10% 60%;
+    
+    --card: 260 20% 10%;
+    --card-foreground: 220 15% 95%;
+    
+    --border: 260 20% 20%;
+    --ring: 280 100% 60%;
+    
+    --success: 150 100% 50%;
+    --warning: 40 100% 55%;
+    --destructive: 0 84% 60%;
+    
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    overflow: hidden;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/30 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/50 rounded-full hover:bg-primary/70;
+  }
+}
+
+@layer components {
+  /* Glassmorphism */
+  .glass {
+    @apply bg-card/60 backdrop-blur-xl border border-white/10 shadow-glass;
+  }
+
+  .glass-hover {
+    @apply glass hover:bg-card/80 hover:border-white/20 transition-all duration-300;
+  }
+
+  /* Neon text effects */
+  .text-glow {
+    text-shadow: 
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 40px currentColor;
+  }
+
+  .text-glow-sm {
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent;
+  }
+
+  /* 3D Card effect */
+  .card-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .card-3d-content {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+  }
+
+  .card-3d:hover .card-3d-content {
+    transform: translateZ(20px);
+  }
+
+  /* Neon borders */
+  .border-glow {
+    @apply relative;
+  }
+
+  .border-glow::before {
+    content: '';
+    @apply absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    filter: blur(15px);
+    z-index: -1;
+  }
+
+  .border-glow:hover::before {
+    @apply opacity-50;
+  }
+
+  /* Button variants */
+  .btn-neon {
+    @apply relative overflow-hidden px-6 py-3 rounded-xl font-semibold;
+    @apply bg-gradient-to-r from-primary to-accent;
+    @apply text-white shadow-neon-purple;
+    @apply transition-all duration-300;
+    @apply hover:shadow-neon-pink hover:scale-105;
+  }
+
+  .btn-neon::before {
+    content: '';
+    @apply absolute inset-0 bg-white/20 translate-x-[-100%];
+    @apply transition-transform duration-500;
+  }
+
+  .btn-neon:hover::before {
+    @apply translate-x-[100%];
+  }
+
+  /* Progress bar shimmer */
+  .progress-shimmer {
+    @apply relative overflow-hidden;
+  }
+
+  .progress-shimmer::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  /* Pulse glow */
+  .pulse-glow {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  /* Perspective utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+
+  .transform-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* Backdrop utilities */
+  .backdrop-blur-xs {
+    backdrop-filter: blur(2px);
+  }
+
+  /* Safe area padding for desktop window controls */
+  .pt-safe {
+    padding-top: env(titlebar-area-height, 32px);
+  }
+}

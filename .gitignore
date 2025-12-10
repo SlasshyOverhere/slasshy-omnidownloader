@@ -1,0 +1,32 @@
+# Node
+node_modules
+dist
+build
+*.local
+.npm
+.env
+.env.*
+
+# Rust
+target/
+src-tauri/target/
+**/*.rs.bk
+
+# Tauri
+src-tauri/gen/schemas
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Binaries
+src-tauri/binaries/
+src-tauri/*.exe
+*.exe
+*.dll
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
